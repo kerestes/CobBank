@@ -1,0 +1,63 @@
+@use "../../../assets/sass/_mixins"
+
+.top-bar
+  border: 1px solid black
+  height: 120px
+  background-color: #810081
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  @include mixins.flex(center, space-around)
+
+  &-brand
+
+    text-align: center
+
+    img
+      height: 80px
+
+  &-menu
+
+    ul
+      padding-left: 40px
+      list-style-type: none
+      margin: 0
+
+      li
+        font-size: 19px
+        float: left
+        padding: 0 25px 10px 25px
+        color: white
+        cursor: pointer
+
+        &:hover
+          color: yellow
+          border-bottom: 3px #020aa8 solid
+
+
+  &-connection
+
+    display: flex
+    align-items: center
+    text-align: center
+
+    a
+      font-size: 18px
+      color: white
+      padding: 0 20px
+
+      &:hover
+        color: yellow
+
+    button
+      background-color: #260E59
+      font-size: 16px
+      padding: 30px 20px
+
+      &:hover
+        color: yellow
+        background-color: rgba(0,0,0,0.4)
+
+      i
+        padding: 0 10px
