@@ -1,0 +1,33 @@
+version: "3.7"
+
+services:
+  postgres-db:
+    image: postgres:16.2
+    environment:
+      - POSTGRES_PASSWORD=rootroot
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=cobbank
+      - PGUSER=postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - ./base_donnees/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - postgresdata:/var/lib/postgresql/data 
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 1s
+      timeout: 5s
+      retries: 10
+
+  apache-cgi:
+    image: cobbank:1.0
+    hostname: localhost
+    command: sh -c "apache2ctl -D FOREGROUND"
+    environment:
+      - DB_NAME=cobbank@postgres-db
+    ports: 
+      - 8000:80
+
+
+volumes:
+  postgresdata:
